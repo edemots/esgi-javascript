@@ -1,33 +1,33 @@
 "use strict";
 
-function ucfirst(entry) {
-  if (typeof entry !== 'string') return "";
-  return entry.toLowerCase().charAt(0).toUpperCase() + entry.slice(1);
+function ucfirst(input) {
+  if (typeof input !== 'string') return "";
+  return input.toLowerCase().charAt(0).toUpperCase() + input.slice(1);
 }
 
-function capitalize(entry, splitter = /[\s]/gi, separator = " ") {
-  if (typeof entry !== 'string') return "";
-  let words = entry.split(splitter);
+function capitalize(input, splitter = /[\s]/gi, separator = " ") {
+  if (typeof input !== 'string') return "";
+  let words = input.split(splitter);
   console.log(words);
   words = words.map(word => ucfirst(word.toLowerCase()));
   return words.join(separator);
 }
 
-function camelCase(entry) {
-  if (typeof entry !== 'string') return "";
-  return capitalize(entry, /[^a-zA-Z0-9]/gi, "");
+function camelCase(input) {
+  if (typeof input !== 'string') return "";
+  return capitalize(input, /[^a-zA-Z0-9]/gi, "");
 }
 
 console.log(camelCase("ToggleCase is_the coolest"));
 
-function snake_case(entry) {
-  if (typeof entry !== 'string') return "";
-  return entry.toLowerCase().replace(/[^\w]/gi, "_");
+function snake_case(input) {
+  if (typeof input !== 'string') return "";
+  return input.toLowerCase().replace(/[^\w]/gi, "_");
 }
 
-function leet(entry) {
-  if (typeof entry !== 'string') return "";
-  return entry.replace(/[aeiouy]/gi, (match) => {
+function leet(input) {
+  if (typeof input !== 'string') return "";
+  return input.replace(/[aeiouy]/gi, (match) => {
     const leet = {
       'a': 4,
       'e': 3,
@@ -56,9 +56,9 @@ function prop_access(object, path = null) {
   }, object);
 }
 
-function verlan(entry) {
-  if (typeof entry !== 'string') return "";
-  return entry
+function verlan(input) {
+  if (typeof input !== 'string') return "";
+  return input
     .split(" ")
     .map(word => word
       .split("")
@@ -67,9 +67,9 @@ function verlan(entry) {
     .join(" ");
 }
 
-function yoda(entry) {
-  if (typeof entry !== 'string') return "";
-  return entry
+function yoda(input) {
+  if (typeof input !== 'string') return "";
+  return input
     .split(" ")
     .reverse()
     .join(" ");
@@ -83,10 +83,10 @@ function getAlphabetIndex(char) {
   return char.charCodeAt(0) - 'a'.charCodeAt(0);
 }
 
-function vig(entry, key) {
-  if (typeof entry !== 'string') return "";
+function vig(input, key) {
+  if (typeof input !== 'string') return "";
   let index = 0;
-  return entry.toLowerCase().split("").map((char) => {
+  return input.toLowerCase().split("").map((char) => {
     if (/[a-z]/.test(char)) {
       const ceasarASCIICode = caesar(
         getAlphabetIndex(char),

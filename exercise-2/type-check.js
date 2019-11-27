@@ -1,7 +1,7 @@
 'use strict'
 
-function type_check_v1 (entry, type) {
-  if (entry === null) return type === "null";
-  if (Array.isArray(entry)) return type === "array";
-  return typeof entry === type;
+function type_check_v1 (input, type) {
+  if (input === null) return type === "null";
+  if (Array.isArray(input)) return type === "array";
+  return typeof input === type;
 }
