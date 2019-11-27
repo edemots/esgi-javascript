@@ -5,23 +5,21 @@ function ucfirst(entry) {
   return entry.toLowerCase().charAt(0).toUpperCase() + entry.slice(1);
 }
 
-function capitalize(entry, separator = " ") {
+function capitalize(entry, splitter = /[\s]/, separator = " ") {
   if (typeof entry !== 'string') return "";
-  let words = entry.split(/[\s]/);
+  let words = entry.split(splitter);
   words = words.map(word => ucfirst(word.toLowerCase()));
   return words.join(separator);
 }
 
-console.log(capitalize("_dipiscing Elit"));
-
 function camelCase(entry) {
   if (typeof entry !== 'string') return "";
-  return capitalize(entry, "");
+  return capitalize(entry, /[^\w]/, "");
 }
 
 function snake_case(entry) {
   if (typeof entry !== 'string') return "";
-  return entry.toLowerCase().replace(/\s/gi, "_");
+  return entry.toLowerCase().replace(/[^\w]/gi, "_");
 }
 
 function leet(entry) {
