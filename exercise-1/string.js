@@ -82,7 +82,7 @@ function getAlphabetIndex(char) {
 
 function vig(entry, key) {
   return entry.split("").map((char, index) => {
-    if (char.match(/[a-z]/)) {
+    if (/[a-z]/.test(char)) {
       const ceasarASCIICode = caesar(
         getAlphabetIndex(char),
         getAlphabetIndex(key[index % key.length])
@@ -93,5 +93,3 @@ function vig(entry, key) {
     return char;
   }).join("");
 }
-
-console.log(vig("wikipedia c'est sympa", "crypto"));
