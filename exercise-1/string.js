@@ -81,6 +81,7 @@ function getAlphabetIndex(char) {
 }
 
 function vig(entry, key) {
+  if (typeof entry !== 'string') return "";
   return entry.toLowerCase().split("").map((char, index) => {
     if (/[a-z]/.test(char)) {
       const ceasarASCIICode = caesar(
