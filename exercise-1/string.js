@@ -5,17 +5,20 @@ function ucfirst(entry) {
   return entry.toLowerCase().charAt(0).toUpperCase() + entry.slice(1);
 }
 
-function capitalize(entry, splitter = /[\s]/, separator = " ") {
+function capitalize(entry, splitter = /[\s]/gi, separator = " ") {
   if (typeof entry !== 'string') return "";
   let words = entry.split(splitter);
+  console.log(words);
   words = words.map(word => ucfirst(word.toLowerCase()));
   return words.join(separator);
 }
 
 function camelCase(entry) {
   if (typeof entry !== 'string') return "";
-  return capitalize(entry, /[^\w]/, "");
+  return capitalize(entry, /[^a-zA-Z0-9]/gi, "");
 }
+
+console.log(camelCase("ToggleCase is_the coolest"));
 
 function snake_case(entry) {
   if (typeof entry !== 'string') return "";
