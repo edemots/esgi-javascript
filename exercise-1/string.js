@@ -24,16 +24,15 @@ function snake_case(entry) {
 
 function leet(entry) {
   if (typeof entry !== 'string') return "";
-  const leet = {
-    'a': '4',
-    'e': '3',
-    'i': '1',
-    'o': '0',
-    'u': '(_)',
-    'y': '7',
-  };
-
   return entry.replace(/[aeiouy]/gi, (match) => {
+    const leet = {
+      'a': 4,
+      'e': 3,
+      'i': 1,
+      'o': 0,
+      'u': '(_)',
+      'y': 7,
+    };
     return leet[match.toLowerCase()];
   });
 }
@@ -73,10 +72,26 @@ function yoda(entry) {
     .join(" ");
 }
 
-function cesar(entry) {
+function caesar(index, offset) {
+  return (index + offset) % 26 + 'a'.charCodeAt(0);
+}
 
+function getAlphabetIndex(char) {
+  return char.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
 }
 
 function vig(entry, key) {
+  return entry.split("").map((char, index) => {
+    if (char.match(/[a-z]/)) {
+      const ceasarASCIICode = caesar(
+        getAlphabetIndex(char),
+        getAlphabetIndex(key[index % key.length])
+      );
 
+      return String.fromCharCode(ceasarASCIICode);
+    }
+    return char;
+  }).join("");
 }
+
+console.log(vig("wikipedia c'est sympa", "crypto"));
