@@ -77,11 +77,11 @@ function caesar(index, offset) {
 }
 
 function getAlphabetIndex(char) {
-  return char.toLowerCase().charCodeAt(0) - 'a'.charCodeAt(0);
+  return char.charCodeAt(0) - 'a'.charCodeAt(0);
 }
 
 function vig(entry, key) {
-  return entry.split("").map((char, index) => {
+  return entry.toLowerCase().split("").map((char, index) => {
     if (/[a-z]/.test(char)) {
       const ceasarASCIICode = caesar(
         getAlphabetIndex(char),
