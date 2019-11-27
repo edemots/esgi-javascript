@@ -1,42 +1,48 @@
 "use strict";
 
 function ucfirst(entry) {
-  return entry.charAt(0).toUpperCase() + entry.slice(1);
+  if (typeof entry !== 'string') return "";
+  return entry.toLowerCase().charAt(0).toUpperCase() + entry.slice(1);
 }
 
 function capitalize(entry, separator = " ") {
-  return () => {
-    let words = entry.split(/[\s_-]/);
-    words.map(word => ucfirst(word));
-    return words.join(separator);
-  };
+  if (typeof entry !== 'string') return "";
+  let words = entry.split(/[\s_-]/);
+  words = words.map(word => ucfirst(word.toLowerCase()));
+  return words.join(separator);
 }
 
 function camelCase(entry) {
-  if (typeof entry !== 'string') return '';
+  if (typeof entry !== 'string') return "";
   return capitalize(entry, "");
 }
 
 function snake_case(entry) {
+  if (typeof entry !== 'string') return "";
   return entry.toLowerCase().replace(/\s/gi, "_");
 }
 
 function leet(entry) {
+  if (typeof entry !== 'string') return "";
   const leet = {
-    'A': '4',
-    'E': '3',
-    'I': '1',
-    'O': '0',
-    'U': '(_)',
-    'Y': '7',
+    'a': '4',
+    'e': '3',
+    'i': '1',
+    'o': '0',
+    'u': '(_)',
+    'y': '7',
   };
 
-  entry.replace(/[AEIOUY]/gi, (match) => {
-    return leet[match];
-  })
+  return entry.replace(/[aeiouy]/gi, (match) => {
+    return leet[match.toLowerCase()];
+  });
 }
 
 function prop_access(object, path = null) {
+  if (object === null) {
+    console.log(path + " not exist");
+    return;
+  }
   if (path === "" || path === null) return object;
 
   return path.split(".").reduce((prev, curr, arr) => {
@@ -49,6 +55,7 @@ function prop_access(object, path = null) {
 }
 
 function verlan(entry) {
+  if (typeof entry !== 'string') return "";
   return entry
     .split(" ")
     .map(word => word
@@ -59,6 +66,7 @@ function verlan(entry) {
 }
 
 function yoda(entry) {
+  if (typeof entry !== 'string') return "";
   return entry
     .split(" ")
     .reverse()
