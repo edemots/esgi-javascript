@@ -1,12 +1,7 @@
-"use strict";
+'use strict'
 
-function type_check_v1(entry, type) {
-  switch (type) {
-    case "null":
-      return entry === null;
-    case "array":
-      return entry.constructor === Array
-    default:
-      return typeof entry === type.toLowerCase();
-  }
+function type_check_v1 (entry, type) {
+  if (entry === null) return type === null;
+  if (Array.isArray(entry) === null) return type === "array";
+  return typeof entry === type;
 }

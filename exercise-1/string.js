@@ -82,13 +82,14 @@ function getAlphabetIndex(char) {
 
 function vig(entry, key) {
   if (typeof entry !== 'string') return "";
-  return entry.toLowerCase().split("").map((char, index) => {
+  let index = 0;
+  return entry.toLowerCase().split("").map((char) => {
     if (/[a-z]/.test(char)) {
       const ceasarASCIICode = caesar(
         getAlphabetIndex(char),
         getAlphabetIndex(key[index % key.length])
       );
-
+      index++;
       return String.fromCharCode(ceasarASCIICode);
     }
     return char;
