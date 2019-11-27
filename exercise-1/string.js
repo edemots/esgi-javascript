@@ -7,10 +7,12 @@ function ucfirst(entry) {
 
 function capitalize(entry, separator = " ") {
   if (typeof entry !== 'string') return "";
-  let words = entry.split(/[\s_-]/);
+  let words = entry.split(/[\s]/);
   words = words.map(word => ucfirst(word.toLowerCase()));
   return words.join(separator);
 }
+
+console.log(capitalize("_dipiscing Elit"));
 
 function camelCase(entry) {
   if (typeof entry !== 'string') return "";
@@ -73,6 +75,10 @@ function yoda(entry) {
     .join(" ");
 }
 
-function vig(entry) {
+function cesar(entry) {
+
+}
+
+function vig(entry, key) {
 
 }
