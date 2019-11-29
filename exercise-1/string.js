@@ -47,7 +47,7 @@ function prop_access(object, path = null) {
   }
   if (path === "" || path === null) return object;
 
-  return path.split(".").reduce((prev, curr, arr) => {
+  return path.split(".").reduce((prev, curr) => {
     if (prev[curr] === undefined) {
       console.log(path + " not exist");
       return;
