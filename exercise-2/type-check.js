@@ -13,13 +13,17 @@ function type_check_v2(input, conf = {type: "", value: "", enum: []}) {
         return false
     if (Object.prototype.hasOwnProperty.call(conf, "value") && JSON.stringify(input) !== JSON.stringify(conf.value))
         return false
-    return !(Object.prototype.hasOwnProperty.call(conf, "enum") && !conf.enum.includes(input))
+    return !(Object.prototype.hasOwnProperty.call(conf, "enum") &&
+        conf.enum.filter(e => JSON.stringify(e) === JSON.stringify(input)).length === 0)
 }
 
 function type_check(input, conf = {type: "", properties: {}, value: "", enum: []}) {
     if (Object.prototype.hasOwnProperty.call(conf, "type") && type_check_v1(input, conf.type)) {
         if (Object.prototype.hasOwnProperty.call(conf, "properties")) {
             for (let propName in conf.properties) {
+                console.log(input[propName], conf.properties[propName])
+                console.log(type_check(input[propName], conf.properties[propName]))
+                console.log("==========");
                 if (!type_check(input[propName], conf.properties[propName]))
                     return false
             }
@@ -32,33 +36,23 @@ function type_check(input, conf = {type: "", properties: {}, value: "", enum: []
 let conf = {
     type: "object",
     properties: {
-        prop1: {
-            type: "number"
-        },
-        prop2: {
-            type: "string",
-            enum: ["val1", "val2"]
-        },
-        prop3: {
+        toto: {
             type: "object",
             properties: {
-                prop31: "number"
-            },
-        },
-        prop4: {
-            type: "array",
-            properties: ["boolean"]
-        },
-    },
+                fi: {value: 3},
+                fa: {enum: [3, "string", {trim: " test "}]}
+            }
+        }
+    }
 }
 
 let input = {
-    prop1: 3,
-    prop2: "val1",
-    prop3: {
-        prop31: 4
-    },
-    prop4: [true, false, false, true],
+    toto: {
+        fi: 3,
+        fa: {
+            trim: " test "
+        }
+    }
 }
 
 console.log(type_check(input, conf));
